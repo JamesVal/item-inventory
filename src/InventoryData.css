@@ -1,0 +1,113 @@
+.data-container {
+  text-align: center;
+}
+
+input[type='text'] {
+  padding: 5px;
+}
+
+.table-header {
+  display: inline-table;
+  width: 80%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.table-container {
+  text-align: center;
+}
+
+.data-table {
+  display: inline-table;
+  text-align: center;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.data-table th:first-child {
+  /*width: 50%;*/
+}
+
+.data-table th:nth-child(2) {
+  /*width: 50%;*/
+}
+
+.data-table th {
+  background-color: #282c34;
+  color: white;
+  padding: 10px;
+}
+
+.data-table tr.odd {
+  background-color: #e8e8e8;
+}
+
+.data-table td {
+  padding: 5px;
+}
+
+.link-container {
+  padding: 15px;
+}
+
+.link-tab {
+  color: green;
+}
+
+.link-tab:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.footer-buttons {
+  text-align:left;
+  display: inline-table;
+  width: 80%;
+  padding-top: 10px;
+}
+
+.add-item-wrapper {
+  display: inline-table;
+  width: 80%;
+}
+
+.add-item {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
+
+.button-div {
+  display: inline-block;
+  padding-top: 10px;
+}
+
+.button-div span {
+  white-space: nowrap;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #282c34;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  /* font-family: arial; */
+  -webkit-touch-callout: none;  /* iOS Safari */
+  -webkit-user-select: none;    /* Safari */
+  -khtml-user-select: none;   /* Konqueror HTML */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
+  user-select: none;        /* Non-prefixed version, currently
+                     supported by Chrome and Opera */
+  transition: width .5s ease, background-color .5s ease;
+}
+
+.button-div span:hover {
+  /*border: 2px solid #487f34;*/
+  background-color: #6f7a90;
+  cursor: pointer;
+}
+
+.button-div span:active {
+  background-color: #282c34;
+}
