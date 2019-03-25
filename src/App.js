@@ -11,8 +11,11 @@ class App extends Component {
         <header className="App-header">
           Item Inventory
         </header>
+        <div className="links-container">
+        <span className="link">Inventory 1</span> | <span className="link">Inventory 2</span> | <span className="link">Inventory 3</span>
+        </div>
         <div className="content">
-          <InventoryData/>
+          <InventoryData iNumber={1}/>
         </div>
       </div>
     );

@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Other things
 *secret*
+*.pem
+*.ppk

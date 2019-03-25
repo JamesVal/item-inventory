@@ -11,6 +11,7 @@ input[type='text'] {
   width: 80%;
   text-align: left;
   font-weight: bold;
+  padding-bottom: 10px;
 }
 
 .table-container {
@@ -110,4 +111,28 @@ input[type='text'] {
 
 .button-div span:active {
   background-color: #282c34;
+}
+
+.remove-item {
+  cursor: pointer;
+  background-color: red;
+  padding: 4px 6px;
+  color: white;
+  -webkit-touch-callout: none;  /* iOS Safari */
+  -webkit-user-select: none;    /* Safari */
+  -khtml-user-select: none;   /* Konqueror HTML */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
+  user-select: none;        /* Non-prefixed version, currently
+                     supported by Chrome and Opera */
+  transition: width .5s ease, background-color .5s ease;
+}
+
+.remove-item:hover {
+  background-color: #ff8080;
+  cursor: pointer;
+}
+
+.remove-item:active {
+  background-color: red;
 }

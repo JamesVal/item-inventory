@@ -5,16 +5,11 @@ import './InventoryData.css';
 import dbClient from './api-db-cli';
 
 class ItemInfo {
-  constructor(id, idx, item_name, quantity, price) {
-    this.idx = idx;
+  constructor(id, item_name, quantity, price) {
+    this._id = id;
     this.item_name = item_name;
     this.quantity = quantity;
     this.price = price;
-    this.flagForDelete = false;
-  }
-
-  setForDelete() {
-    this.flagForDelete = true;
   }
 }
 
@@ -48,7 +43,6 @@ class InventoryData extends React.Component {
       for (let idx = 0; idx < data.length; idx++) {
         let newItem = new ItemInfo(
           data[idx]._id,
-          idx,
           data[idx].item_name,
           data[idx].quantity,
           data[idx].price
@@ -76,23 +70,28 @@ class InventoryData extends React.Component {
     });
   }
 
-  handleClick(idx) {
+  handleClick = (idx) => (evt) => {
     console.log("click", idx);
   }
 
   handleAddClick() {
     let curData = this.state.tableData;
-    console.log(curData);
-    console.log(curData.length);
-    let newItem = new ItemInfo(0, curData.length, "", 0, 0.0);
+    let newItem = new ItemInfo(0, "", 0, 0.0);
 
     curData.push(newItem);
     this.setState({tableData: curData});
-
     console.log("addClick");
   }
 
-  handleChange(idx, evt) {
+  handleRemoveClick = (idx) => (evt) => {
+    console.log("remove");
+    let curData = this.state.tableData;
+    curData.splice(idx, 1);
+
+    this.setState({tableData: curData});
+  }
+
+  handleChange = (idx) => (evt) => {
     console.log("change", idx);
 
     let curTableData = this.state.tableData;
@@ -120,7 +119,6 @@ class InventoryData extends React.Component {
       for (let idx = 0; idx < data.length; idx++) {
         let newItem = new ItemInfo(
           data[idx]._id,
-          idx,
           data[idx].item_name,
           data[idx].quantity,
           data[idx].price
@@ -131,26 +129,14 @@ class InventoryData extends React.Component {
 
       this.setState({tableData: newList});
     });
-/*
-    dbClient.updateData(this.state.tableData).then((data) => {
-      console.log(data);
-    });
-
-    dbClient.deleteData(this.state.tableData).then((data) => {
-      console.log(data);
-    });
-
-    dbClient.deleteAllData().then((data) => {
-      console.log(data);
-    });
-*/    
   }
 
   render() {
-    let tableRows = this.state.tableData.map((tableData) => 
-      <tr key={tableData.idx} className={this.isOdd(tableData.idx)}>
-        <td onClick={this.handleClick.bind(this, tableData.idx)}>{tableData.idx+1}</td>
-        <td><input type="text" onChange={this.handleChange.bind(this, tableData.idx)} value={tableData.item_name} /></td>
+    let tableRows = this.state.tableData.map((tableData, idx) => 
+      <tr key={idx} className={this.isOdd(idx)}>
+        <td onClick={this.handleClick(idx)}>{idx+1}</td>
+        <td><input type="text" onChange={this.handleChange(idx)} value={tableData.item_name} /></td>
+        <td><span className="remove-item" onClick={this.handleRemoveClick(idx)}>X</span></td>
       </tr>
     );
 
@@ -158,12 +144,13 @@ class InventoryData extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className="data-container">
           <div className="table-container">
-            <div className="table-header">Inventory Data</div>
+            <div className="table-header">Inventory Data {this.props.iNumber}</div>
             <table className="data-table">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Remove</th>
                 </tr>
               </thead>
               <tbody>

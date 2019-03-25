@@ -26,6 +26,19 @@ body {
   color: #61dafb;
 }
 
+.links-container {
+  padding: 10px;
+}
+
+.link {
+  color: #282c34;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
