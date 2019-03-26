@@ -2,6 +2,7 @@
   "name": "item-inventory",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://ec2-54-193-23-23.us-west-1.compute.amazonaws.com/item-inventory",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
