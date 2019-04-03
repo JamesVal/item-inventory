@@ -4,10 +4,55 @@ import logo from './logo.svg';
 import './App.css';
 
 import Welcome from './Welcome';
+import Login from './Login';
 import InventoryData from './InventoryData';
+
+var isAuth = false;
+
+class NeedsAuth extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let { from } = this.props.location.state || { from: { pathname: "/" } };
+    /*let { redirectToReferrer } = this.state;*/
+
+    return (
+      <div>Must be logged in to view this path: {from.pathname}! <Link to="/login" className="link"><span className="link">Click Here to login</span></Link></div>
+    );
+  }
+}
+
+class ProtectedRoute extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    var renderedComponent = <Redirect to={{ pathname: "/needauth", state: { from: this.props.location } }}/>;
+
+
+    if (isAuth) {
+      var Component = this.props.component;
+      var componentProps = this.props.componentProps;
+
+      renderedComponent = <Route render={(props) => <Component {...props} {...componentProps}/>}/>
+    }
+
+    return (
+      <div>{renderedComponent}</div>
+    );
+  }
+}
 
 class App extends Component {
   render() {
+    var inventoryArr = [1, 2, 3].map((idx) => 
+      /*<Route path={"/i"+idx} render={(props) => <InventoryData {...props} iNumber={idx}/>}/>*/
+      <ProtectedRoute path={"/i"+idx} component={InventoryData} componentProps={{iNumber: idx}}/>
+    );
+
     return (
       <div className="App">
         <header className="App-header">
@@ -24,9 +69,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/home"/>}/>
             <Route path="/home" component={Welcome}/>
-            <Route path="/i1" render={(props) => <InventoryData {...props} iNumber={1}/>}/>
-            <Route path="/i2" render={(props) => <InventoryData {...props} iNumber={2}/>}/>
-            <Route path="/i3" render={(props) => <InventoryData {...props} iNumber={3}/>}/>
+            <Route path="/needauth" component={NeedsAuth}/>
+            <Route path="/login" component={Login}/>
+            {inventoryArr}
           </Switch>
         </div>
         </Router>
