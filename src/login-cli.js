@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'universal-cookie';
 import environment_vars from './environment/environment-secret';
 
 function LoginClient() {
@@ -14,9 +15,19 @@ LoginClient.prototype.postLogin = function(login) {
       data: JSON.stringify({"login": login}),
       contentType: "application/json"
     }).done((data) => {
-      resolve(data);
+      const token = JSON.parse(data).token;
+      const cookies = new Cookies();
+      let result = "Success!";
+      
+      if (token) {
+        console.log("Save token", token);
+        cookies.set("II_TOKEN", token, {path: "/"});
+      } else {
+        result = JSON.parse(data).error;
+      }
+      resolve(JSON.parse(data));
     }).fail((err) => {
-      reject(err);
+      reject(JSON.parse(err));
     });
   });
 }

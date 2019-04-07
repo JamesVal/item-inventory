@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const api_db = require('./api-db/api-db');
+const api_login = require('./api-login/api-login');
 
 app.use(cors());
 app.options("*", cors());
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 /* Setup routes */
 app.use("/api_db", api_db);
+app.use("/auth", api_login);
 
 /* Default to index.html */
 app.get('*', function(req, res) {

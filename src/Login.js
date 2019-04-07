@@ -4,12 +4,6 @@ import './Login.css';
 
 import loginClient from './login-cli';
 
-class LoginInfo {
-  constructor() {
-
-  }
-}
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +42,7 @@ class Login extends React.Component {
     console.log("click", this.state.loginInfo);
     loginClient.postLogin(this.state.loginInfo)
       .then((result) => {
-
+        console.log("result", result);
       })
       .catch((err) => {
         console.log("err", err);

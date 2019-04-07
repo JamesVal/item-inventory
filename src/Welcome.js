@@ -17,7 +17,7 @@ class Welcome extends React.Component {
 
   render() {
     return (
-      <div class="content">Welcome!</div>
+      <div className="content">Welcome!</div>
     );
   }
 }
