@@ -11,7 +11,8 @@ class Login extends React.Component {
     this.state = {
       loginInfo: {
         user: "",
-        password: ""
+        password: "",
+        permissions: 0
       }
     };
 
@@ -43,6 +44,7 @@ class Login extends React.Component {
     loginClient.postLogin(this.state.loginInfo)
       .then((result) => {
         console.log("result", result);
+        this.props.onLoginUpdate(result);
       })
       .catch((err) => {
         console.log("err", err);

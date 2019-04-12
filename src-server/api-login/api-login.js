@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
         console.log("data", data);
         if (req.body.login.password === data[0].password) {
           const token = utils.getUid(256);
-          res.send(JSON.stringify({"token": token, "error": ""}));
+          res.send(JSON.stringify({"token": token, "permissions": data[0].permissions, "error": ""}));
         } else {
           res.send(JSON.stringify({"token": "", "error": "Error: Wrong username or password"}));
         }
